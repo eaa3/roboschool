@@ -8,6 +8,7 @@ ifeq ($(UNAME),Linux)
   LIBS =-L/usr/lib64 -lm -lGL -L$(HOME)/.boost/lib
   INC  =-I/usr/include
   BOOST_MT=
+  USE_PYTHON3=0
   ifneq ($(USE_PYTHON3),0)
     HAVE_PYTHON3=$(shell which python3)
   endif
@@ -48,8 +49,8 @@ ifeq ($(UNAME),Darwin)
   RPATH = -Wl,-undefined,dynamic_lookup
 endif
 
-INC += `$(PKG) --cflags Qt5Widgets Qt5OpenGL assimp bullet`
-LIBS += `$(PKG) --libs Qt5Widgets Qt5OpenGL assimp bullet`
+INC += `$(PKG) --cflags Qt5Widgets Qt5OpenGL assimp bullet python-$(PYTHON)`
+LIBS += `$(PKG) --libs Qt5Widgets Qt5OpenGL assimp bullet python-$(PYTHON)`
 LIBS    += -lstdc++
 INC     += -I/usr/local/include/bullet
 LIBS    += $(RPATH) -lLinearMath -lBullet3Common -lBulletCollision -lBulletDynamics -lBulletInverseDynamics -lBulletSoftBody -lPhysicsClientC_API
